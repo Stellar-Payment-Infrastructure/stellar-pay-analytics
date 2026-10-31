@@ -1,0 +1,41 @@
+{
+  "name": "stellar-pay-analytics-web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Analytics dashboard for Stellar Pay (testnet)",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "5.105.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "recharts": "2.15.4",
+    "stellar-pay-sdk": "0.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.39.5",
+    "@testing-library/jest-dom": "6.10.0",
+    "@testing-library/react": "16.3.3",
+    "@testing-library/user-event": "14.6.8",
+    "@types/node": "22.20.5",
+    "@types/react": "18.3.31",
+    "@types/react-dom": "18.3.7",
+    "@vitejs/plugin-react": "4.7.0",
+    "axe-core": "4.10.3",
+    "eslint": "9.39.5",
+    "eslint-plugin-react-hooks": "5.2.0",
+    "jsdom": "25.0.1",
+    "typescript": "5.6.3",
+    "typescript-eslint": "8.72.1",
+    "vite": "5.4.21",
+    "vitest": "2.1.9"
+  }
+}
