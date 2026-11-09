@@ -15,6 +15,8 @@ import {
 
 export const DECIMALS = 7;
 export const TOKEN_CODE = 'XLM';
+// TODO(wave: analytics-1): replace polling with SSE/WebSocket push from the
+// aggregator (with reconnection), keeping polling as the fallback.
 export const POLL_MS = 30_000;
 
 const fmt = (v: string | null | undefined) => (v === null || v === undefined ? '—' : `${formatAmount(v, DECIMALS, { minFractionDigits: 2 })} ${TOKEN_CODE}`);

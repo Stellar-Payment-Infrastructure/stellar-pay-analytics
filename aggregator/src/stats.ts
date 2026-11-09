@@ -42,6 +42,8 @@ export interface VolumeBucket {
 }
 
 /** Settled volume per UTC bucket, zero-filled across the whole window. */
+// TODO(wave: analytics-2): per-token breakdown (volume, count, average by
+// token). v0.1.0 has a single token; use fixture data until core-1 lands.
 export async function volume(db: Db, w: Window, interval: Interval): Promise<{ total: string; count: number; buckets: VolumeBucket[] }> {
   const merchantCond = w.merchantId ? sql`AND p.merchant_id = ${w.merchantId}` : sql``;
   const res = await db.execute(sql`

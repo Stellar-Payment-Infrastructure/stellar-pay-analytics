@@ -89,6 +89,8 @@ export function createApp(deps: { db: Db; logger: Logger; token: string; health?
     res.json({ from: w.from.toISOString(), to: w.to.toISOString(), merchantId: w.merchantId ?? null, ...(await stats.averageSize(db, w)) });
   }));
 
+  // TODO(wave: analytics-3): CSV/JSON export with the same filters, streamed
+  // for large result sets (and an export button in web/src/Dashboard.tsx).
   r.get('/payments', wrap(async (req, res) => {
     const { q, w } = parseWindow(req.query);
     const cursor = q.cursor ? stats.decodeCursor(q.cursor) : undefined;

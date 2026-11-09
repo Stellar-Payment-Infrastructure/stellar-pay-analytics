@@ -91,3 +91,6 @@ Results (all merchants):
 
 Merchant A only: total volume **4,000,001**; success 3 / 5 = **"60.00"**;
 average 4,000,001 / 3 = **1,333,333**.
+
+<!-- TODO(wave: analytics-4): a best-practices guide (metric design, interpreting success rate, privacy,
+     pitfalls) that builds on these definitions. -->
