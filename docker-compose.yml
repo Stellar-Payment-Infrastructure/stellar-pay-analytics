@@ -1,5 +1,8 @@
-version: '3.8'
-
+# Local stack: Postgres + aggregator + dashboard. Build context is this
+# repository root because both packages share one pnpm workspace.
+#   cp aggregator/.env.example aggregator/.env   # fill in API_KEYS and STATS_BEARER_TOKEN
+#   ANALYTICS_TOKEN=<same value as STATS_BEARER_TOKEN> docker compose up --build
+# Dashboard: http://localhost:8080
 services:
   postgres:
     image: postgres:16-alpine
@@ -19,28 +22,29 @@ services:
 
   aggregator:
     build:
-      context: ./aggregator
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: aggregator/Dockerfile
+    env_file: aggregator/.env
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/stellar_pay_analytics
     ports:
       - "4000:4000"
-    environment:
-      - NODE_ENV=production
-      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/stellar_pay_analytics
-      - API_BASE_URL=http://host.docker.internal:3000/v1
-      - API_KEY=sk_test_aggregator
-      - BEARER_TOKEN=analytics-secret-token
     depends_on:
       postgres:
         condition: service_healthy
 
   web:
     build:
-      context: ./web
-      dockerfile: Dockerfile
-    ports:
-      - "5173:80"
+      context: .
+      dockerfile: web/Dockerfile
     environment:
-      - VITE_API_URL=http://localhost:4000
+      AGGREGATOR_URL: http://aggregator:4000
+      # nginx adds this bearer token server-side; it never reaches the browser.
+      ANALYTICS_TOKEN: ${ANALYTICS_TOKEN:?set ANALYTICS_TOKEN to the aggregator STATS_BEARER_TOKEN}
+    ports:
+      - "8080:8080"
+    depends_on:
+      - aggregator
 
 volumes:
   analytics_postgres_data:
