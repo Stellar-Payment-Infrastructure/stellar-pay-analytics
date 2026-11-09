@@ -11,7 +11,7 @@ RUN pnpm install --frozen-lockfile --filter stellar-pay-analytics-web
 COPY web ./web
 RUN pnpm --filter stellar-pay-analytics-web run build
 
-FROM nginxinc/nginx-unprivileged:1.27-alpine
+FROM nginxinc/nginx-unprivileged:1.31-alpine
 COPY --from=build /app/web/dist /usr/share/nginx/html
 # Rendered at start by the image's envsubst step. ANALYTICS_TOKEN (the
 # aggregator's STATS_BEARER_TOKEN) must be set at runtime; it stays server-side.
