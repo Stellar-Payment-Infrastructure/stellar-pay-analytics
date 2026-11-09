@@ -24,7 +24,7 @@ jobs:
       run:
         working-directory: ${{ matrix.package }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v4
         with:
           version: ${{ env.PNPM_VERSION }}
@@ -42,6 +42,6 @@ jobs:
     name: docker build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: docker build --file aggregator/Dockerfile --tag stellar-pay-analytics-aggregator:ci .
       - run: docker build --file web/Dockerfile --tag stellar-pay-analytics-web:ci .
