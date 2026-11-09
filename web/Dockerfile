@@ -1,7 +1,7 @@
 # Dashboard image: static build served by unprivileged nginx on :8080.
 # Build from the repository root (the pnpm workspace root):
 #   docker build -f web/Dockerfile -t stellar-pay-analytics-web .
-FROM node:22-alpine AS build
+FROM node:26-alpine AS build
 WORKDIR /app
 RUN npm install --global pnpm@9.15.9
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
